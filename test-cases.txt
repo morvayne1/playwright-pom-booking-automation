@@ -1,0 +1,61 @@
+1. Book a room with valid data
+
+Preconditions:
+- User application is opened
+
+Steps:
+1. Choose a room to book
+2. Click "Book now" button
+3. Choose valid check-in and check-out dates
+4. Click the "Reserve Now" button
+4. Enter valid user data (First name, Last name, Email, Phone)
+5. Click the "Reserve Now" button
+
+Expected Result:
+- Confirmation message is displayed
+
+2. Try to book a room with invalid data
+
+Preconditions:
+- User application is opened
+
+Steps:
+2. Choose a room to book
+2. Click "Book now" button
+3. Choose invalid check-in and check-out dates
+4. Click the "Reserve Now" button
+
+Expected Result:
+- Validation error message is displayed
+- User stays on the booking form
+
+3. Check that already booked fates show "unavailable" title
+
+Preconditions:
+- User application is opened
+
+Steps:
+2. Choose a room to book
+2. Click "Book now" button
+3. Find already booked days
+
+Expected Result:
+- Booked days show "unavailable" title
+
+4. Check that already booked dates are unavailable
+
+Preconditions:
+- User application is opened
+- Room has an existing booking for specific dates
+
+Steps:
+2. Select the room that already has a booking
+3. Click "Book now" button
+4. Try to select dates that are already booked
+
+Expected Result:
+- Already booked dates are shown as unavailable
+- User cannot select unavailable dates
+
+Actual Result: 
+Dates are shown as unavailable but remain selectable → Bug
