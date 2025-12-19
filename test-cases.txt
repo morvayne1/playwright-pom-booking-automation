@@ -33,11 +33,12 @@ Expected Result:
 
 Preconditions:
 - User application is opened
+- Room has an existing booking for specific dates
 
 Steps:
 2. Choose a room to book
 2. Click "Book now" button
-3. Find already booked days
+3. Find already booked dates
 
 Expected Result:
 - Booked days show "unavailable" title

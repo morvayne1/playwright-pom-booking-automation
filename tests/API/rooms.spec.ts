@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('rooms API', () => {
   test('create a room from admin panel and check if user can see it', async ({ request }) => {
     
-    const response = await request.post('https://automationintesting.online/api/auth/login', {
+    const loginResponse = await request.post('https://automationintesting.online/api/auth/login', {
         data: {
           username: 'admin',
           password: 'password'
@@ -11,12 +11,12 @@ test.describe('rooms API', () => {
       }
     )
 
-    const responseBody = await response.json()
-    const access = responseBody.token
+    const loginData = await loginResponse.json()
+    const authToken = loginData.token
 
     await request.post('https://automationintesting.online/api/room', {
       headers: {
-        cookie: `token=${access}`
+        cookie: `token=${authToken}`
       },
       data: {
         "roomName":"Test",
@@ -30,9 +30,9 @@ test.describe('rooms API', () => {
     })
 
     const roomResponse = await request.get('https://automationintesting.online/api/room')
-    const rooms = await roomResponse.json()
+    const roomsData = await roomResponse.json()
     
-    const createdRoom = rooms.rooms.find(
+    const createdRoom = roomsData.rooms.find(
       (room: any) => room.roomName === 'Test'
     )
 
@@ -88,7 +88,7 @@ test.describe('rooms API', () => {
   })
 
   test('edit room from admin API and check changes from user API', async ({page, request}) => {
-    const response = await request.post('https://automationintesting.online/api/auth/login', {
+    const loginResponse = await request.post('https://automationintesting.online/api/auth/login', {
         data: {
           username: 'admin',
           password: 'password'
@@ -96,12 +96,12 @@ test.describe('rooms API', () => {
       }
     )
 
-    const responseBody = await response.json()
-    const access = responseBody.token
+    const loginData = await loginResponse.json()
+    const authToken = loginData.token
 
     await request.post('https://automationintesting.online/api/room', {
       headers: {
-        cookie: `token=${access}`
+        cookie: `token=${authToken}`
       },
       data: {
         "roomName":"Test",
@@ -125,7 +125,7 @@ test.describe('rooms API', () => {
 
     await request.put(`https://automationintesting.online/api/room/${newRoomId}`, {
         headers: {
-            cookie: `token=${access}`
+            cookie: `token=${authToken}`
         },
         data : {
             "roomid":`${newRoomId}`,
@@ -157,7 +157,7 @@ test.describe('rooms API', () => {
   })
 
   test('delete the room from admin API and check if room deleted from user API', async ({page, request}) => {
-    const response = await request.post('https://automationintesting.online/api/auth/login', {
+    const loginResponse = await request.post('https://automationintesting.online/api/auth/login', {
         data: {
           username: 'admin',
           password: 'password'
@@ -165,12 +165,12 @@ test.describe('rooms API', () => {
       }
     )
 
-    const responseBody = await response.json()
-    const access = responseBody.token
+    const loginData = await loginResponse.json()
+    const authToken = loginData.token
 
     await request.post('https://automationintesting.online/api/room', {
       headers: {
-        cookie: `token=${access}`
+        cookie: `token=${authToken}`
       },
       data: {
         "roomName":"Test",
@@ -185,7 +185,7 @@ test.describe('rooms API', () => {
 
     let roomResponse = await request.get('https://automationintesting.online/api/room')
     let rooms = await roomResponse.json()
-    console.log(rooms)
+    
     const createdRoom = rooms.rooms.find(
       (room: any) => room.roomName === 'Test'
     )
@@ -194,13 +194,13 @@ test.describe('rooms API', () => {
 
     await request.delete(`https://automationintesting.online/api/room/${newRoomId}`, {
         headers: {
-            cookie: `token=${access}`
+            cookie: `token=${authToken}`
         }
     })
 
     roomResponse = await request.get('https://automationintesting.online/api/room')
     rooms = await roomResponse.json()
-    console.log(rooms)
+
     const deletedRoom = rooms.rooms.find(
       (room: any) => room.roomName === 'Test'
     )

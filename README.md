@@ -58,8 +58,8 @@ Expected result: Booked dates should be non-interactive (disabled) or show a war
 
 
 ## Running Tests
-npx playwright test                  # Run all tests
-npx playwright test tests/ui.spec.ts # Run only UI tests
-npx playwright test tests/api.spec.ts # Run only API tests
-npx playwright test --headed         # Run in headed mode
-npx playwright show-report           # View report after run
+npx playwright test                  - Run all tests
+npx playwright test tests/ui.spec.ts - Run only UI tests
+npx playwright test tests/api.spec.ts - Run only API tests
+npx playwright test --headed         - Run in headed mode
+npx playwright show-report           - View report after run
