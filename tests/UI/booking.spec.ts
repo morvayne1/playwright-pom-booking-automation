@@ -10,7 +10,7 @@ test.describe('booking proccesses', () => {
     await homePage.goToPage();
    });
 
-    test('booking valid dates', async ({page}) => {
+    test('booking valid dates @quarantine', async ({page}) => {
         const homePage = new HomePage(page)
         const roomPage = new RoomPage(page)
         const bookingPage = new BookingPage(page)
